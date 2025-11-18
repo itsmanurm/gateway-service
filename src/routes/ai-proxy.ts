@@ -4,8 +4,12 @@ import axiosRetry from 'axios-retry';
 
 const r = Router();
 
-const AI_BASE_URL = process.env.AI_BASE_URL!;
-const AI_API_KEY  = process.env.AI_API_KEY!;
+const AI_BASE_URL = process.env.AI_BASE_URL;
+const AI_API_KEY  = process.env.AI_API_KEY;
+
+if (!AI_BASE_URL || !AI_API_KEY) {
+  throw new Error('AI_BASE_URL and AI_API_KEY must be configured');
+}
 
 const client = axios.create({
   baseURL: AI_BASE_URL,
